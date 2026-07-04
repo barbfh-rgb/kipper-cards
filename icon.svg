@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#e6c35c"/>
+      <stop offset="50%" stop-color="#bf9b30"/>
+      <stop offset="100%" stop-color="#8a6f1f"/>
+    </linearGradient>
+  </defs>
+  <!-- Background -->
+  <rect width="512" height="512" rx="80" fill="#3d2f00"/>
+  <!-- Gold gradient wash -->
+  <rect width="512" height="512" rx="80" fill="url(#goldGrad)" opacity="0.16"/>
+  <!-- BFH -->
+  <text x="256" y="188"
+    text-anchor="middle"
+    font-family="Georgia, 'Times New Roman', serif"
+    font-size="128"
+    font-weight="bold"
+    fill="url(#goldGrad)"
+    letter-spacing="-2">BFH</text>
+  <!-- Divider -->
+  <line x1="145" y1="212" x2="367" y2="212" stroke="url(#goldGrad)" stroke-width="2" opacity="0.55"/>
+  <!-- Kipper card motif: two overlapping cards -->
+  <g transform="translate(256,345)">
+    <rect x="-72" y="-58" width="96" height="132" rx="10" transform="rotate(-10)" fill="none" stroke="url(#goldGrad)" stroke-width="6" opacity="0.55"/>
+    <rect x="-48" y="-66" width="96" height="132" rx="10" transform="rotate(6)" fill="#3d2f00" stroke="url(#goldGrad)" stroke-width="7"/>
+    <circle cx="0" cy="0" r="15" fill="url(#goldGrad)"/>
+  </g>
+</svg>

@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en-GB">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#0e0720">
+    <meta name="description" content="About Kipper Cards — where the deck comes from and how it differs from tarot.">
+    <title>About Kipper Cards</title>
+    <link rel="manifest" href="manifest.json">
+    <link rel="icon" href="icons/icon-192.png">
+    <link rel="apple-touch-icon" href="icons/icon-512.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&family=Cinzel:wght@400;600&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <div id="sky"></div>
+    <header class="app-header">
+      <div>
+        <p class="eyebrow">36-card Kipper oracle</p>
+        <h1>About Kipper Cards</h1>
+      </div>
+      <nav class="main-nav" aria-label="Main">
+        <a href="index.html#/home">Home</a>
+        <a href="index.html#/deck">Deck</a>
+        <a href="about.html" class="is-active">About</a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="panel">
+        <div class="section-heading">
+          <span class="diamond" aria-hidden="true"></span>
+          <div>
+            <h2>Where Kipper comes from</h2>
+          </div>
+        </div>
+        <div class="about-content">
+          <p>The Kipper deck takes its name from Maria Anna Kirch, sometimes nicknamed "Frau Kipper," a fortune teller credited with a 19th-century German card set first published around 1890. Unlike tarot, which grew out of playing cards used for a trick-taking game before it was ever used for divination, Kipper cards were designed from the start as a plain-spoken fortune-telling tool — practical, domestic, and grounded in everyday life: houses, letters, journeys, money, health, and the people around you.</p>
+          <p>It sits in the same family as Lenormand cards, sharing a similar 36-card structure and several familiar images (the Rider, the Ship, the Heart, the Ring). But Kipper has its own distinct flavour: more people-focused, more concerned with relationships and daily circumstance than with abstract fate.</p>
+        </div>
+      </section>
+
+      <section class="panel">
+        <div class="section-heading">
+          <span class="diamond" aria-hidden="true"></span>
+          <div>
+            <h2>How it differs from tarot</h2>
+          </div>
+        </div>
+        <div class="about-content">
+          <p>Tarot leans symbolic and psychological — seventy-eight cards, major and minor arcana, each one dense with archetype and open to layered, personal interpretation. A single tarot card can carry a whole meditation's worth of meaning on its own.</p>
+          <p>Kipper is deliberately more direct. Its thirty-six cards are read upright only — there's no reversed meaning to untangle — and a single card in isolation tells you comparatively little. Kipper's real technique, and the thing that makes it distinct, is reading cards <em>in combination with their neighbours</em>. The Ship on its own is just travel; the Ship next to the Letter is news arriving from a distance. Meaning is built between cards, not inside them. That's the whole logic this app is built around.</p>
+        </div>
+      </section>
+
+      <section class="panel">
+        <div class="section-heading">
+          <span class="diamond" aria-hidden="true"></span>
+          <div>
+            <h2>Reading it your own way</h2>
+          </div>
+        </div>
+        <div class="about-content">
+          <p>There's no single authority on how Kipper "should" be read, and no governing tradition you need to belong to before you're allowed to use it. Folk fortune-tellers, grandmothers reading over a kitchen table, and witches with no fixed rulebook have all used decks like this one for the same reason: it's a plain, practical way of laying out a question and looking at it clearly.</p>
+          <p>This app follows the traditional structure — upright meanings, neighbour combinations, the Grand Tableau's houses and corners — because that structure is what makes the readings coherent. What you bring to the reading, and what you make of what comes up, is entirely yours.</p>
+        </div>
+      </section>
+    </main>
+
+    <footer class="app-footer">
+      <p>Kipper Cards works offline once loaded, and reads upright only — Kipper is traditionally not read reversed.</p>
+    </footer>
+
+    <script>
+      (function buildSky() {
+        const f = document.createDocumentFragment();
+        for (let i = 0; i < 120; i++) {
+          const s = document.createElement('div');
+          s.className = 's';
+          const sz = Math.random() * 2 + 0.4;
+          Object.assign(s.style, {
+            width: sz + 'px',
+            height: sz + 'px',
+            top: Math.random() * 100 + '%',
+            left: Math.random() * 100 + '%',
+            '--d': (Math.random() * 5 + 2) + 's',
+            '--dl': (Math.random() * 7) + 's'
+          });
+          f.appendChild(s);
+        }
+        document.getElementById('sky').appendChild(f);
+      })();
+    </script>
+  </body>
+</html>
