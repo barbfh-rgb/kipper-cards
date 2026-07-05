@@ -312,7 +312,9 @@ function renderTableau(root) {
       if (tile.proximity === "significator") el.classList.add("is-significator");
       else if (tile.proximity === "near") el.classList.add("is-near");
       if (tile.corner) el.classList.add("is-corner");
+      el.title = `No. ${tile.card.id} — ${tile.card.name}`;
       el.innerHTML = `
+        <div class="tile-icon">${cardIconSVG(tile.card.id)}</div>
         <span class="tile-number">${tile.card.id}</span>
         <span class="tile-name">${tile.card.name}</span>
       `;
