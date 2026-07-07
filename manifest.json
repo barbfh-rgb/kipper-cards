@@ -1,7 +1,7 @@
 {
   "name": "Kipper Cards",
   "short_name": "Kipper",
-  "description": "A 36-card Kipper oracle reading app, read by neighbouring card combinations.",
+  "description": "A 39-card Kipper oracle reading app, read by neighbouring card combinations.",
   "start_url": "/",
   "scope": "/",
   "display": "standalone",

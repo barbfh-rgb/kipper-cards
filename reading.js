@@ -70,6 +70,13 @@ const KipperReading = (function () {
     return KIPPER_CARDS.map((card) => card.id);
   }
 
+  // Grand Tableau is a fixed 4x9 (36-cell) layout — traditional structure,
+  // so it draws only from the traditional 36 and excludes Marchetti's
+  // three additions (Poverty, Toil and Labour, Community).
+  function tableauCardIds() {
+    return KIPPER_CARDS.filter((card) => card.id <= 36).map((card) => card.id);
+  }
+
   // ---- combinations ---------------------------------------------------
 
   function combinationKey(idA, idB) {
@@ -197,7 +204,7 @@ const KipperReading = (function () {
 
   function drawGrandTableau(seed, significatorId) {
     const useSeed = seed || newSeed();
-    const shuffled = seededShuffle(allCardIds(), useSeed);
+    const shuffled = seededShuffle(tableauCardIds(), useSeed);
     const grid = shuffled.map((id, index) => {
       const rowCol = positionToRowCol(index);
       return { index, row: rowCol.row, col: rowCol.col, card: getCard(id) };

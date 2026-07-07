@@ -3,267 +3,292 @@
  * Pure data only. No DOM, no reading logic — edit meanings here freely
  * without touching reading.js or app.js.
  *
- * Each card: id (1-36, traditional order), name, meaning (one line),
- * short (1-2 sentence interpretation), long (fuller paragraph).
+ * Matched to Barbara's Fin de Siècle deck: standard Kipper name first,
+ * with Marchetti's own title in brackets where his differs.
+ * 39 cards total — the traditional 36 plus Marchetti's three additions
+ * (Poverty, Toil and Labour, Community). The Grand Tableau spread uses
+ * only cards 1-36, since its 4x9 grid is the traditional layout.
+ *
+ * Each card: id (1-39), name, meaning (one line), short (1-2 sentence
+ * interpretation), long (fuller paragraph).
  * Kipper is read upright only — there are no reversed meanings.
  */
 
 const KIPPER_CARDS = [
   {
     id: 1,
-    name: "Rider",
-    meaning: "News, a visitor, something arriving from outside",
-    short: "News is on its way — often good, sometimes simply word arriving from someone outside your day-to-day.",
-    long: "The Rider is movement toward you: a message, a visitor, or news approaching from outside your immediate circle. It rarely brings the news itself — it signals that something is en route. Combined with cards of feeling or event, it tells you what kind of news to expect and where it's coming from."
+    name: "Main Male",
+    significator: true,
+    meaning: "The male querent, or the main male figure in the reading",
+    short: "Represents a man at the centre of the reading, often chosen as the significator for a male querent.",
+    long: "Main Male stands for the principal male figure in a reading, or is chosen deliberately as a significator to represent the person having the reading. Cards drawn around him describe his situation, feelings, and circumstances rather than being read as standalone omens."
   },
   {
     id: 2,
-    name: "Clover",
-    meaning: "Luck, a small joy, a brief lucky break",
-    short: "A small stroke of luck — pleasant, real, but usually short-lived rather than life-changing.",
-    long: "Clover is good fortune in miniature: a lucky coincidence, an easy win, a moment of relief. It doesn't promise lasting change, but it does promise that things go your way for a little while. Its meaning sharpens a lot depending on its neighbours — pair it with something serious and it softens the blow; pair it with something joyful and it doubles it."
+    name: "Main Female",
+    significator: true,
+    meaning: "The female querent, or the main female figure in the reading",
+    short: "Represents a woman at the centre of the reading, often chosen as the significator for a female querent.",
+    long: "Main Female stands for the principal female figure in a reading, or is chosen deliberately as a significator to represent the person having the reading. Cards drawn around her describe her situation, feelings, and circumstances rather than being read as standalone omens."
   },
   {
     id: 3,
-    name: "Ship",
-    meaning: "Travel, business, movement, a journey or venture",
-    short: "Movement — a trip, a business dealing, or something set in motion that's now underway.",
-    long: "The Ship represents distance covered: physical travel, a business venture, import or export, or simply something moving from one state to another. It's forward motion, and usually welcome motion. Read alongside its neighbours to see what's moving, where it's going, and what it's carrying with it."
+    name: "Marriage",
+    meaning: "Union, commitment, a formal partnership",
+    short: "A binding union — marriage, or any formal commitment made concrete.",
+    long: "Marriage is commitment given a name and a shape: a wedding, a formal partnership, a bond that's been made official rather than left implied. It doesn't have to mean a literal ceremony — a business partnership or a settled agreement can wear this card too. Its neighbours usually reveal what kind of union, and how solid it is."
   },
   {
     id: 4,
-    name: "House",
-    meaning: "Home, family, domestic life, security",
-    short: "Home and family — the domestic centre of the matter, or literal security and shelter.",
-    long: "The House is the household itself: family, home life, and the sense of a settled base. It can point to a literal property, or to the emotional centre a person returns to. Its neighbours usually tell you whose home, and what's happening inside it."
+    name: "Meeting",
+    meaning: "Social contact, an encounter, coming together",
+    short: "An encounter — two people or paths coming together, often the start of something.",
+    long: "Meeting is contact itself: an encounter, an introduction, two threads crossing that weren't crossing before. It's more casual and open-ended than Marriage — a meeting doesn't promise commitment, only that a connection has been made. Its neighbours describe who's involved and where it might lead."
   },
   {
     id: 5,
-    name: "Tree",
-    meaning: "Health, roots, slow and steady growth",
-    short: "Health and roots — something growing slowly, steadily, and deeply rather than quickly.",
-    long: "The Tree speaks to health, family lineage, and anything that grows over a long time rather than overnight. It asks for patience — nothing here is instant. In health readings it's a central card; elsewhere it points to something with deep roots, good or troubled."
+    name: "Good Gentleman (Mature Man)",
+    meaning: "Older male figure, mentor, father figure, authority",
+    short: "An older man of experience — a mentor, father figure, or someone whose authority is earned rather than given.",
+    long: "The Good Gentleman is an older male presence: a father figure, mentor, or someone whose steadiness comes from years lived rather than position held. He tends to be a stabilising, protective figure in a reading. His neighbours show what guidance or support he's offering, and to whom."
   },
   {
     id: 6,
-    name: "Clouds",
-    meaning: "Doubt, confusion, temporary trouble",
-    short: "Confusion or a mixed patch — not disaster, but things aren't clear right now.",
-    long: "Clouds bring doubt, mixed feelings, or a passing patch of difficulty. It's rarely permanent — clouds move — but while it sits over a card it obscures the clean read of it. Look at what's either side: is the cloud lifting, or gathering?"
+    name: "Good Lady (Mature Woman)",
+    meaning: "Older female figure, mentor, maternal figure",
+    short: "An older woman of experience — a mentor, maternal figure, or someone whose wisdom comes from years lived.",
+    long: "The Good Lady is an older female presence: a mother figure, mentor, or someone whose steadiness comes from years lived rather than position held. Like her counterpart, she tends to be a stabilising, nurturing figure in a reading. Her neighbours show what guidance or support she's offering, and to whom."
   },
   {
     id: 7,
-    name: "Snake",
-    meaning: "Betrayal, complication, a rival or indirect path",
-    short: "A complication, a rival, or someone acting indirectly rather than straightforwardly.",
-    long: "The Snake is the traditional warning card: deceit, a third party complicating things, or a situation that isn't as straightforward as it looks. It doesn't always mean malice — sometimes it's just an indirect, roundabout path to where you're going. Pay close attention to its neighbours; they usually name what's being complicated."
+    name: "Letter",
+    meaning: "News, correspondence, a message arriving",
+    short: "News is on its way — a letter, message, or piece of correspondence approaching.",
+    long: "Letter is communication in motion: a message, a piece of correspondence, news arriving from outside your immediate circle. It rarely tells you the content itself — it signals that word is coming. Combined with cards of feeling or event, it shows what kind of news to expect and how it lands."
   },
   {
     id: 8,
-    name: "Coffin",
-    meaning: "An ending, transformation, illness, a hard stop",
-    short: "An ending or a hard stop — a chapter closing so something else can begin.",
-    long: "The Coffin is the deck's clearest ending card. It rarely means literal death; far more often it means a definite close — a job, a phase, a way of doing things, sometimes health. It's uncomfortable, but it's honest: whatever it touches is finished, and its neighbours describe what has to end and what comes after."
+    name: "False Person",
+    meaning: "Deception, dishonesty, someone not to be trusted",
+    short: "Someone who isn't being straight with you — deception, or a person acting in bad faith.",
+    long: "False Person is the deck's clearest warning card: dishonesty, a hidden agenda, someone presenting one face while another is true. It doesn't always name a stranger — it can just as easily point to someone already trusted, which is exactly why it matters. Its neighbours usually name who, and where the dishonesty lies."
   },
   {
     id: 9,
-    name: "Bouquet",
-    meaning: "Invitation, a gift, a kind gesture, pleasure",
-    short: "A gift, invitation, or gesture of appreciation — something pleasant offered to you.",
-    long: "The Bouquet is warmth extended outward: an invitation, a present, a compliment, a kind gesture. It's one of the deck's gentler cards, softening whatever it sits beside. It can also point to beauty, celebration, or being appreciated for who you are."
+    name: "Change",
+    meaning: "A shift in circumstances, often sudden",
+    short: "Circumstances shifting — a change, often quick and not entirely of your choosing.",
+    long: "Change marks a turning point: a shift in circumstances that arrives with some speed rather than growing slowly. It's neutral in itself — the shift can be welcome or unwelcome — but it always means things won't stay as they were. Its neighbours describe what's changing and which direction it's moving in."
   },
   {
     id: 10,
-    name: "Scythe",
-    meaning: "A sudden cut, danger, a quick decisive action",
-    short: "Something sudden and sharp — a quick decision, a cut, or a warning to act with care.",
-    long: "The Scythe is abrupt: a sudden decision, a sharp cut to a situation, or a risk of injury or accident. It's a card of speed rather than patience — whatever it touches happens fast, for better or worse. Take it as a nudge to move decisively, or a caution to slow down and watch your step, depending on its company."
+    name: "Journey",
+    meaning: "Travel, movement, leaving something behind",
+    short: "Movement — a trip, a departure, or something set in motion and now underway.",
+    long: "Journey is distance covered: physical travel, a departure, or simply something moving from one state to another and leaving the old one behind. It's forward motion, usually welcome. Read alongside its neighbours to see what's moving, where it's headed, and what's being left."
   },
   {
     id: 11,
-    name: "Whip",
-    meaning: "Conflict, argument, repeated friction",
-    short: "Friction or an argument — a dispute that's recurring rather than a one-off.",
-    long: "The Whip is conflict with a rhythm to it: repeated arguments, ongoing friction, a disagreement that keeps resurfacing rather than resolving. It can also point, more literally, to exercise or discipline. Its neighbours usually show who the friction is with and what keeps triggering it."
+    name: "Sudden Wealth",
+    meaning: "Unexpected money, a windfall, quick gain",
+    short: "An unexpected financial gain — money arriving quickly and from an unforeseen source.",
+    long: "Sudden Wealth is a windfall: money arriving faster and more unexpectedly than through ordinary income. It's a welcome card, though 'sudden' cuts both ways — gains that come quickly can also need managing carefully rather than spent at the same pace. Its neighbours usually show the source, and whether it lasts."
   },
   {
     id: 12,
-    name: "Birds",
-    meaning: "Nervous energy, chatter, anxiety, a pair or couple",
-    short: "Talk, nerves, or a pair of people — conversation and a little restlessness.",
-    long: "Birds bring conversation, gossip, and nervous energy — small talk that carries real information if you listen for it. They can also represent a couple or pair, two people linked together. Anxiety often rides alongside this card; it's the deck's way of saying 'a lot of chatter, not much stillness.'"
+    name: "Rich Girl (Privileged Lady)",
+    meaning: "A younger woman of means, ease, or advantage",
+    short: "A younger woman with means or advantage — ease, comfort, or a position of privilege.",
+    long: "The Rich Girl represents a younger woman who moves through the world with some advantage already in hand — financial ease, status, or simply favourable circumstance. She isn't necessarily idle; the card is about advantage, not laziness. Her neighbours show whether that advantage is being used well or taken for granted."
   },
   {
     id: 13,
-    name: "Child",
-    meaning: "Something new and small, innocence, a fresh start",
-    short: "Something new, small, and just beginning — innocent, unformed, full of potential.",
-    long: "The Child is newness in its earliest form: a literal child, a new idea, a fresh start that hasn't grown into anything yet. It carries innocence and a lack of guile. Combined with other cards it often points to the very beginning of whatever they describe, before it's had time to develop."
+    name: "Young Good Lord (Wealthy Man)",
+    meaning: "A younger man of means, ambition, status",
+    short: "A younger man of means or ambition — someone building or already holding status.",
+    long: "The Young Good Lord represents a younger man with resources, ambition, or rising status — someone on the way up, or already arrived. He carries more drive than the Good Gentleman's settled authority. His neighbours show what he's building toward, or who he's connected with."
   },
   {
     id: 14,
-    name: "Fox",
-    meaning: "Deception, tricky work matters, self-employment",
-    short: "Something not quite straightforward — often at work, or someone being cunning rather than honest.",
-    long: "The Fox is cleverness that isn't fully trustworthy: a tricky work situation, a colleague or deal that isn't what it seems, or self-employment and independent hustle. It rewards caution rather than blind trust. Its neighbours usually reveal exactly where the trickery lies."
+    name: "Sad News",
+    meaning: "Disappointing information, a setback in communication",
+    short: "Disappointing news landing — information that sets things back rather than moves them forward.",
+    long: "Sad News is a letdown delivered in words: information that disappoints, a setback communicated rather than simply felt. It's rarely catastrophic on its own, but it does mean bracing for something less than hoped for. Its neighbours usually show the subject of the news and how heavily it lands."
   },
   {
     id: 15,
-    name: "Bear",
-    meaning: "Power, authority, protectiveness, financial strength",
-    short: "A powerful figure or force — a boss, protector, or financial muscle behind the situation.",
-    long: "The Bear represents authority and strength: a boss, a protective figure, or raw financial power. It can be a fierce ally or, when it turns, a source of jealousy or heavy-handed control. Read its neighbours to see whether that strength is working for you or against you."
+    name: "Lovers (Success in Love)",
+    meaning: "Romantic fulfilment, a good match, mutual affection",
+    short: "Romantic fulfilment — a good match, mutual affection, love going well.",
+    long: "Lovers is one of the deck's warmest cards: a good match, mutual affection, romantic success rather than romantic struggle. It tends to soften whatever sits beside it and mark the emotional high point of a spread. Where it lands often shows exactly where love is working."
   },
   {
     id: 16,
-    name: "Stars",
-    meaning: "Hope, clarity, guidance, success",
-    short: "Clarity and hope — a clear path opening up, often after confusion.",
-    long: "The Stars bring clear guidance after a murky patch: hope, insight, and a sense of direction returning. It's one of the deck's most reassuring cards, especially when it follows Clouds or Mountain. It can also point toward spiritual insight or simply seeing a situation clearly for the first time."
+    name: "His Thoughts",
+    meaning: "What is on someone's mind, a change of heart or perspective",
+    short: "What's on someone's mind — private thought, or a shift in how they see things.",
+    long: "His Thoughts points inward: what someone is privately turning over, a change of heart, a perspective quietly shifting before it's spoken aloud. It's one of the few cards that describes an internal state rather than an external event. Neighbours usually reveal whose thoughts, and what they're circling."
   },
   {
     id: 17,
-    name: "Stork",
-    meaning: "Change, a move, transformation, relocation",
-    short: "Change is underway — a move, a shift, a transformation in circumstances.",
-    long: "The Stork signals change in motion: a relocation, a shift in life stage, or a transformation that's already begun rather than merely hoped for. Unlike the Coffin's hard ending, the Stork is change as continuation — one form of life becoming another."
+    name: "Gift",
+    meaning: "Something given freely, appreciation, a kindness received",
+    short: "A gift or gesture of appreciation — something given freely, without a hidden cost.",
+    long: "Gift is warmth given outward and inward: a present, a kind gesture, appreciation offered or received. It's one of the deck's gentler cards, softening whatever sits beside it. It can also mark a talent or something someone was simply born with, not earned."
   },
   {
     id: 18,
-    name: "Dog",
-    meaning: "Loyalty, friendship, a trusted companion",
-    short: "A loyal friend or trusted companion — reliable, genuine, on your side.",
-    long: "The Dog is uncomplicated loyalty: a true friend, a faithful partner, or fidelity itself as a quality at play in the reading. It's one of the most straightforwardly reassuring cards in the deck. Its neighbours usually name who that loyal presence is, or where fidelity is being tested."
+    name: "Child",
+    meaning: "A new beginning, innocence, something small or young",
+    short: "Something new, small, and just beginning — innocent, unformed, full of potential.",
+    long: "Child is newness in its earliest form: a literal child, a new idea, a fresh start that hasn't grown into anything yet. It carries innocence and a lack of guile. Combined with other cards it often marks the very beginning of whatever they describe, before it's had time to develop."
   },
   {
     id: 19,
-    name: "Tower",
-    meaning: "Institutions, authority, isolation, ambition",
-    short: "Officialdom or isolation — a bank, government body, hospital, or simply standing apart.",
-    long: "The Tower represents large institutions and formal authority — banks, government, hospitals, employers — as well as a personal sense of isolation or standing alone. It can point to ambition and achievement too, the tower you've built for yourself. Context from its neighbours decides which reading fits."
+    name: "Fatality",
+    meaning: "An event beyond control, fate, something unavoidable",
+    short: "Something beyond your control — fate, an unavoidable turn of events.",
+    long: "Fatality names what can't be argued with: an event beyond personal control, a turn dictated by circumstance rather than choice. It's rarely comfortable to draw, but it's honest — and Kipper tradition holds that what this card names is best met directly rather than resisted. Its neighbours show what the fated matter actually concerns."
   },
   {
     id: 20,
-    name: "Park",
-    meaning: "Public life, social gathering, community",
-    short: "Public life and social gathering — being seen, socialising, community connection.",
-    long: "The Park is life lived in company: social gatherings, community, networking, being visible among others rather than in private. It's a fairly neutral, pleasant card — the world of people and events beyond your own four walls."
+    name: "House",
+    meaning: "Home, family, domestic life",
+    short: "Home and family — the domestic centre of the matter, or literal security and shelter.",
+    long: "House is the household itself: family, home life, and the sense of a settled base. It can point to a literal property, or to the emotional centre a person returns to. Its neighbours usually tell you whose home, and what's happening inside it."
   },
   {
     id: 21,
-    name: "Mountain",
-    meaning: "An obstacle, delay, a blockage",
-    short: "A blockage or delay — something large and slow to shift standing in the way.",
-    long: "The Mountain is resistance: an obstacle, a hold-up, something that isn't moving no matter how much you push. It can also, more literally, point to distance or something foreign and far away. It's rarely permanent, but it demands patience and often a different route rather than a head-on push."
+    name: "Living Room (Family Room)",
+    meaning: "Close family matters, private gatherings",
+    short: "Close family matters — private gatherings, the inner circle rather than the wider world.",
+    long: "The Living Room is the House drawn in closer: private family matters, small gatherings among people who already know each other well, conversations that happen behind closed doors rather than in public. Its neighbours show what's being discussed, or who's gathered."
   },
   {
     id: 22,
-    name: "Crossroad",
-    meaning: "A choice, a decision point, alternative paths",
-    short: "A decision point — more than one path available, and a choice still to be made.",
-    long: "The Crossroad marks a genuine fork: options on the table, a decision not yet settled. It doesn't tell you which way to go, only that a choice exists and it's yours to make. Its neighbours often describe what each path leads toward."
+    name: "Official Person (Military Person)",
+    meaning: "Authority, institution, someone in uniform or formal role",
+    short: "Someone in a formal or official role — authority, institution, a uniformed or ranked position.",
+    long: "The Official Person represents formal authority made personal: someone acting through an institutional role — official, uniformed, ranked, or otherwise operating by the rules of a larger structure rather than as a private individual. Neighbours show whether that authority is helpful or an obstacle."
   },
   {
     id: 23,
-    name: "Mice",
-    meaning: "Loss, worry, gradual erosion",
-    short: "Small, gradual loss — something being worn away rather than taken all at once.",
-    long: "Mice represent slow erosion: worry that nibbles away at peace of mind, small losses that add up, theft, or stress wearing down something that was once solid. It's rarely dramatic, which is exactly what makes it dangerous — it works quietly. Its neighbours usually show what's being worn away."
+    name: "Court of Law",
+    meaning: "Legal matters, disputes, formal judgment",
+    short: "A legal matter — a dispute, a formal judgment, something to be settled by the rules rather than privately.",
+    long: "Court of Law brings formal process to a dispute: legal proceedings, a judgment being sought, a disagreement that's escalated beyond what can be settled quietly between the people involved. Its neighbours usually name what's being contested and how it's likely to resolve."
   },
   {
     id: 24,
-    name: "Heart",
-    meaning: "Love, affection, genuine feeling",
-    short: "Genuine love or affection — the matters of the heart at the centre of the reading.",
-    long: "The Heart is real feeling: love, affection, warmth between people. It's one of the deck's most welcome cards and tends to soften whatever sits beside it. Where it lands often marks the emotional core of the whole spread."
+    name: "Theft",
+    meaning: "Loss, something taken, vulnerability",
+    short: "Something taken or lost — loss, vulnerability, a sense of being exposed.",
+    long: "Theft is loss made literal: something taken, whether property, money, trust, or a sense of safety. It doesn't always describe a crime — it can be loss of any kind that leaves someone feeling exposed. Its neighbours usually name what's been taken and from where."
   },
   {
     id: 25,
-    name: "Ring",
-    meaning: "Commitment, contracts, a cycle, an agreement",
-    short: "Commitment or agreement — a contract, partnership, or a cycle coming full circle.",
-    long: "The Ring is anything bound and ongoing: a marriage, a contract, a partnership, or a repeating cycle. It represents commitment made concrete. Its neighbours reveal what kind of commitment, and whether it's solid or under strain."
+    name: "High Honours",
+    meaning: "Recognition, achievement, status",
+    short: "Recognition or achievement — status earned and acknowledged.",
+    long: "High Honours is recognition made public: an achievement acknowledged, status conferred, standing that others can see and confirm. It's an unambiguously positive card, marking a genuine high point rather than a private hope. Its neighbours show what the recognition is for."
   },
   {
     id: 26,
-    name: "Book",
-    meaning: "Secrets, hidden knowledge, study",
-    short: "Something not yet known — a secret, hidden information, or a matter still being studied.",
-    long: "The Book holds what hasn't been revealed: a secret, undisclosed information, or knowledge still being gathered through study or research. It can be neutral (a course of study, a mystery yet to unfold) or pointed (something being deliberately kept from you). Neighbours usually tell you which."
+    name: "Great Fortune",
+    meaning: "Deep fulfilment, dreams realised, happiness",
+    short: "Deep fulfilment — dreams realised, happiness that runs all the way through.",
+    long: "Great Fortune is the deck's clearest card of true happiness: dreams realised, deep fulfilment, a joy that isn't fleeting or partial. Wherever it lands, it lifts the reading, much as the Sun does in tarot. It's about as close as Kipper gets to an unambiguous 'yes, and it's good.'"
   },
   {
     id: 27,
-    name: "Letter",
-    meaning: "Written communication, documents, news in writing",
-    short: "Written word — a letter, message, email, or document carrying information.",
-    long: "The Letter is communication in written form: a message, an email, a document, official correspondence. Unlike the Rider's news in motion, the Letter is the content itself, fixed in writing. Its neighbours describe what the message concerns and how it lands."
+    name: "Unhoped-for Money",
+    meaning: "A small, welcome windfall, quick financial turnaround",
+    short: "A small, welcome windfall — money arriving when it wasn't expected at all.",
+    long: "Unhoped-for Money is a smaller, quicker cousin to Sudden Wealth: a modest financial turnaround that arrives without being asked for or planned around. It's not life-changing, but it's real relief exactly when it's needed. Its neighbours usually show the source."
   },
   {
     id: 28,
-    name: "Man",
-    significator: true,
-    significatorLabel: "Gentleman",
-    meaning: "The male querent or the main male figure — used as a significator",
-    short: "Represents a man at the centre of the reading, often chosen as the significator for a male querent.",
-    long: "The Man (Gentleman) stands for the principal male figure in a reading, or is chosen deliberately as a significator to represent the person having the reading. Cards drawn around him describe his situation, feelings, and circumstances rather than being read as standalone omens."
+    name: "Expectations",
+    meaning: "Hope, longing, patience for something not yet arrived",
+    short: "Hope held while waiting — longing for something that hasn't arrived yet, but might.",
+    long: "Expectations is hope stretched across time: a longing for something not yet here, patience being asked of you while the outcome is still unwritten. It doesn't promise the thing hoped for will arrive, only that the hoping itself is the current state. Its neighbours often show how likely that hope is to land."
   },
   {
     id: 29,
-    name: "Woman",
-    significator: true,
-    significatorLabel: "Lady",
-    meaning: "The female querent or the main female figure — used as a significator",
-    short: "Represents a woman at the centre of the reading, often chosen as the significator for a female querent.",
-    long: "The Woman (Lady) stands for the principal female figure in a reading, or is chosen deliberately as a significator to represent the person having the reading. Cards drawn around her describe her situation, feelings, and circumstances rather than being read as standalone omens."
+    name: "Prison",
+    meaning: "Restriction, feeling trapped, limitation",
+    short: "A feeling of being trapped — restriction, limitation, circumstances that confine.",
+    long: "Prison is restriction made concrete: feeling trapped, boxed in, limited by circumstance, obligation, or someone else's control. It's rarely literal incarceration — far more often it's a job, a relationship, or a situation that has stopped feeling like a choice. Its neighbours usually show what's doing the confining."
   },
   {
     id: 30,
-    name: "Lily",
-    meaning: "Peace, maturity, family harmony",
-    short: "Calm and maturity — peace within a family, or an older, settled kind of harmony.",
-    long: "The Lily brings peace that comes with age and experience: family harmony, a mature relationship, a calm resolution reached after time rather than in haste. It can also carry a quiet undertone of sensuality within long-term partnership. It's a gently reassuring card, rarely negative."
+    name: "Court Official",
+    meaning: "A lawyer, judge, or formal decision-maker",
+    short: "A lawyer, judge, or decision-maker — someone whose formal ruling will matter.",
+    long: "The Court Official is the person behind the process named by Court of Law: a lawyer, a judge, an official whose decision carries formal weight. Where Court of Law names the dispute, this card names the person deciding it. Neighbours show which way that decision is likely to lean."
   },
   {
     id: 31,
-    name: "Sun",
-    meaning: "Success, vitality, clarity, joy",
-    short: "Success and vitality — one of the deck's clearest positive cards.",
-    long: "The Sun is warmth, success, and plain good energy. Wherever it lands, it lifts the reading — clarity replaces confusion, vitality replaces fatigue, joy is at hand. It's about as close as Kipper gets to an unambiguous 'yes, and it's good.'"
+    name: "Short Illness",
+    meaning: "Temporary ill health, need for rest",
+    short: "A passing bout of ill health — temporary, and asking for rest rather than alarm.",
+    long: "Short Illness is health trouble that passes: a temporary setback, a need for rest and recovery rather than a lasting condition. It's a card to take seriously without over-reacting to. Its neighbours usually show whose health, and how quickly things turn around."
   },
   {
     id: 32,
-    name: "Moon",
-    meaning: "Recognition, reputation, emotion beneath the surface",
-    short: "Recognition or reputation — feelings and standing that matter to others' perception of you.",
-    long: "The Moon deals in reputation, recognition, and the emotional undercurrent beneath a situation — how something is perceived, honoured, or felt privately even if not said aloud. It can point to public standing or to a private emotional truth, depending on its company."
+    name: "Sorrow and Unpleasantness",
+    meaning: "Despair, distress, a difficult period",
+    short: "A genuinely difficult period — despair, distress, a run of unpleasantness to get through.",
+    long: "Sorrow and Unpleasantness is one of the deck's heaviest cards: real distress, a difficult stretch that shouldn't be minimised. It doesn't offer a silver lining on its own — that has to come from its neighbours, which usually show what's causing the difficulty and whether relief is nearby."
   },
   {
     id: 33,
-    name: "Key",
-    meaning: "Certainty, a solution, an important 'yes'",
-    short: "A definite answer — something important, certain, and unlocked.",
-    long: "The Key is certainty: a solution found, an important 'yes,' something unlocked after searching. It emphasises and strengthens whatever card sits beside it, marking that matter as significant and largely settled rather than in doubt."
+    name: "Gloomy Thoughts",
+    meaning: "Low mood, mental strain, dark thinking",
+    short: "Low mood and mental strain — thinking that's turned dark, worry that won't settle.",
+    long: "Gloomy Thoughts is distress carried internally rather than caused externally: low mood, rumination, a mental fog that colours everything else in the reading while it sits there. It's rarely permanent, but while it lingers it obscures a clean read of whatever's beside it."
   },
   {
     id: 34,
-    name: "Fish",
-    meaning: "Money, business, abundance",
-    short: "Money and business — cash flow, financial dealings, material abundance.",
-    long: "The Fish is the deck's clearest money card: income, business dealings, financial abundance or its flow. It moves easily, for better or worse — money coming in fast can also mean money moving out fast. Neighbours describe the source and the direction of flow."
+    name: "Work and Occupation",
+    meaning: "Employment, daily labour, one's job",
+    short: "Employment and daily work — the job itself, and how it's going.",
+    long: "Work and Occupation is the working life plainly named: employment, daily labour, the job someone does and how it's currently going. It's a fairly neutral card in itself — its neighbours decide whether the work is going well, badly, or simply continuing."
   },
   {
     id: 35,
-    name: "Anchor",
-    meaning: "Stability, steadfastness, long-term security",
-    short: "Stability — something long-term, secure, and steady rather than fleeting.",
-    long: "The Anchor represents lasting stability: steady work, a secure foundation, commitment to staying the course. In good company it's deeply reassuring; beside more restrictive cards it can tip into feeling stuck rather than settled. Context decides which."
+    name: "Long Road",
+    meaning: "A lengthy path, patience needed, distance",
+    short: "A lengthy path ahead — distance to cover, and patience needed to cover it.",
+    long: "Long Road stretches Journey out over time: not a quick trip but a drawn-out path, a process that takes longer than hoped, distance that has to be covered gradually. It asks for patience rather than urgency. Its neighbours show what's at the end of the road."
   },
   {
     id: 36,
-    name: "Cross",
-    meaning: "A burden, a difficulty to carry, fate",
-    short: "A burden or a test — something difficult but unavoidable, to be carried rather than escaped.",
-    long: "The Cross is the deck's card of unavoidable burden: a difficulty, a test of endurance, something that must be carried rather than sidestepped. It's rarely comfortable to draw, but it's honest — and Kipper tradition holds that what the Cross names, facing directly is the only real way through."
+    name: "Great Water / Hope",
+    meaning: "Deep emotion, spiritual longing, dreams and aspiration",
+    short: "Deep feeling and aspiration — emotion running underneath the surface, hope reaching upward.",
+    long: "Great Water carries the deck's deepest emotional current: spiritual longing, dreams and aspiration, feeling that runs far beneath the practical surface of a question. It often marks what someone truly wants, beneath what they've been asking about directly. Its neighbours show whether that deeper hope is being met."
+  },
+  {
+    id: 37,
+    name: "Poverty",
+    meaning: "Financial hardship, lack, struggle",
+    short: "Financial hardship — lack, struggle, resources stretched thin.",
+    long: "Poverty is scarcity named directly: financial hardship, a stretch where resources don't cover what's needed. One of Marchetti's three additions to the traditional 36, it's a card to take seriously rather than soften. Its neighbours usually show the cause, and whether relief is within reach."
+  },
+  {
+    id: 38,
+    name: "Toil and Labour",
+    meaning: "Hard, grinding work, effort without much reward",
+    short: "Grinding effort — hard work that isn't yet paying off the way it should.",
+    long: "Toil and Labour is work at its most exhausting: effort that's real and sustained but not yet matched by reward. It's harder-edged than Work and Occupation's neutral employment — this card is about the grind specifically. Its neighbours often show whether the effort is close to paying off."
+  },
+  {
+    id: 39,
+    name: "Community",
+    meaning: "Collective support, belonging, shared effort",
+    short: "Collective support — belonging, shared effort, strength found in numbers.",
+    long: "Community is the deck's card of shared strength: belonging, collective support, something achieved or endured together rather than alone. The last of Marchetti's three additions, it softens hardship cards nearby and amplifies good ones. Its neighbours show who that support is coming from."
   }
 ];
 
@@ -277,128 +302,80 @@ const KIPPER_CARDS = [
  * a pair isn't listed here.
  */
 const KIPPER_COMBINATIONS = {
-  "1_27": "Rider + Letter: news arriving in writing — a message on its way.",
-  "1_3": "Rider + Ship: news about travel, or news arriving from a distance.",
-  "1_4": "Rider + House: news concerning home or family.",
-  "1_6": "Rider + Clouds: unsettling or unclear news — wait for more detail.",
-  "1_8": "Rider + Coffin: news of an ending, or news that closes a matter.",
-  "1_28": "Rider + Man: news concerning, or brought by, a man.",
-  "1_29": "Rider + Woman: news concerning, or brought by, a woman.",
-  "3_27": "Ship + Letter: news arriving from a distance.",
-  "3_4": "Ship + House: a move, or business affecting the home.",
-  "3_34": "Ship + Fish: a business venture with money attached.",
-  "3_35": "Ship + Anchor: a journey that leads to something settled and secure.",
-  "3_21": "Ship + Mountain: a journey delayed, or travel to somewhere distant.",
-  "3_36": "Ship + Cross: a difficult journey, or travel undertaken out of necessity.",
-  "4_24": "House + Heart: love within the home — a happy household.",
-  "4_23": "House + Mice: money worries or small losses affecting the home.",
-  "4_7": "House + Snake: complication or tension within the family.",
-  "4_17": "House + Stork: a house move, or change within the household.",
-  "4_28": "House + Man: a man's home life, or a man at the centre of domestic matters.",
-  "4_29": "House + Woman: a woman's home life, or a woman at the centre of domestic matters.",
-  "7_28": "Snake + Man: a man acting indirectly, or a complication involving a man.",
-  "7_29": "Snake + Woman: a woman acting indirectly, or a complication involving a woman.",
-  "7_24": "Snake + Heart: a complicated or deceptive matter of the heart.",
-  "7_14": "Snake + Fox: two forms of deception overlapping — proceed carefully.",
-  "8_24": "Coffin + Heart: the end of a relationship or a painful emotional close.",
-  "8_4": "Coffin + House: an ending connected to home — moving on from a place.",
-  "8_5": "Coffin + Tree: a health matter reaching a serious or final point.",
-  "8_25": "Coffin + Ring: the end of a commitment or agreement.",
-  "8_28": "Coffin + Man: an ending concerning a man, or a man facing a hard close.",
-  "8_29": "Coffin + Woman: an ending concerning a woman, or a woman facing a hard close.",
-  "9_24": "Bouquet + Heart: a heartfelt gift or a loving gesture.",
-  "9_28": "Bouquet + Man: a gift or invitation from a man.",
-  "9_29": "Bouquet + Woman: a gift or invitation from a woman.",
-  "9_27": "Bouquet + Letter: an invitation arriving in writing.",
-  "10_24": "Scythe + Heart: a sudden, sharp change in a relationship.",
-  "10_25": "Scythe + Ring: a commitment ending abruptly, or a quick decision to commit.",
-  "10_4": "Scythe + House: a sudden change affecting the home.",
-  "10_5": "Scythe + Tree: a sudden health scare — worth taking seriously.",
-  "11_24": "Whip + Heart: recurring arguments within a relationship.",
-  "11_4": "Whip + House: ongoing friction within the household.",
-  "11_28": "Whip + Man: conflict with, or caused by, a man.",
-  "11_29": "Whip + Woman: conflict with, or caused by, a woman.",
-  "12_24": "Birds + Heart: nervous energy around a relationship — talk more than certainty.",
-  "12_27": "Birds + Letter: news or messages exchanged back and forth.",
-  "12_28": "Birds + Man: conversation or anxious energy involving a man.",
-  "12_29": "Birds + Woman: conversation or anxious energy involving a woman.",
-  "13_4": "Child + House: a new addition to the household, literal or otherwise.",
-  "13_29": "Child + Woman: a woman connected to a child, or new beginnings for her.",
-  "13_28": "Child + Man: a man connected to a child, or new beginnings for him.",
-  "13_25": "Child + Ring: a new commitment still in its early, unformed stage.",
-  "14_28": "Fox + Man: a man not being entirely straightforward, especially at work.",
-  "14_29": "Fox + Woman: a woman not being entirely straightforward, especially at work.",
-  "14_26": "Fox + Book: hidden trickery — something being concealed at work.",
-  "15_28": "Bear + Man: a powerful or protective man, possibly a boss.",
-  "15_29": "Bear + Woman: a powerful or protective woman, possibly a boss.",
-  "15_34": "Bear + Fish: financial strength or power over money.",
-  "16_26": "Stars + Book: insight gained through study — clarity after research.",
-  "16_29": "Stars + Woman: hope and clear guidance for a woman.",
-  "16_28": "Stars + Man: hope and clear guidance for a man.",
-  "16_31": "Stars + Sun: a very positive combination — hope followed by real success.",
-  "17_4": "Stork + House: a house move, or a change in the household.",
-  "17_29": "Stork + Woman: a significant change or transition for a woman.",
-  "17_28": "Stork + Man: a significant change or transition for a man.",
-  "18_28": "Dog + Man: a loyal male friend or trustworthy male companion.",
-  "18_29": "Dog + Woman: a loyal female friend or trustworthy female companion.",
-  "19_27": "Tower + Letter: official or formal correspondence.",
-  "19_28": "Tower + Man: a man connected to institutions, authority, or isolation.",
-  "19_29": "Tower + Woman: a woman connected to institutions, authority, or isolation.",
-  "20_24": "Park + Heart: a happy social gathering, or love found in public life.",
-  "20_28": "Park + Man: a man active in social or public life.",
-  "20_29": "Park + Woman: a woman active in social or public life.",
-  "21_28": "Mountain + Man: an obstacle involving a man, or a man standing in the way.",
-  "21_29": "Mountain + Woman: an obstacle involving a woman, or a woman standing in the way.",
-  "21_27": "Mountain + Letter: delayed news or correspondence.",
-  "22_28": "Crossroad + Man: a decision facing a man.",
-  "22_29": "Crossroad + Woman: a decision facing a woman.",
-  "23_34": "Mice + Fish: money slowly draining away.",
-  "23_4": "Mice + House: small worries or losses affecting the home.",
-  "23_24": "Mice + Heart: worry quietly wearing down a relationship.",
-  "24_25": "Heart + Ring: a loving relationship moving toward commitment.",
-  "24_28": "Heart + Man: genuine feeling for, or from, a man.",
-  "24_29": "Heart + Woman: genuine feeling for, or from, a woman.",
-  "24_27": "Heart + Letter: a loving message, or feelings expressed in writing.",
-  "24_31": "Heart + Sun: a joyful, thriving relationship.",
-  "25_28": "Ring + Man: a commitment or agreement involving a man.",
-  "25_29": "Ring + Woman: a commitment or agreement involving a woman.",
-  "25_36": "Ring + Cross: a difficult commitment, or a bond that carries a burden.",
-  "26_28": "Book + Man: a secret kept by, or concerning, a man.",
-  "26_29": "Book + Woman: a secret kept by, or concerning, a woman.",
-  "26_27": "Book + Letter: hidden information revealed in writing.",
-  "27_3": "Letter + Ship: written news arriving from far away.",
-  "27_4": "Letter + House: correspondence concerning the home.",
-  "27_34": "Letter + Fish: written news about money or business.",
-  "27_28": "Letter + Man: a written message from, or concerning, a man.",
-  "27_29": "Letter + Woman: a written message from, or concerning, a woman.",
-  "27_24": "Letter + Heart: a heartfelt letter or loving message.",
-  "28_29": "Man + Woman: a relationship between the two — read their other neighbours to see how it's going.",
-  "24_7": "Heart + Snake: love complicated by a rival or a third party.",
-  "28_7": "Man + Snake: a man behaving in an indirect or untrustworthy way.",
-  "29_7": "Woman + Snake: a woman behaving in an indirect or untrustworthy way.",
-  "28_8": "Man + Coffin: an ending affecting a man, or a man facing a hard close.",
-  "29_8": "Woman + Coffin: an ending affecting a woman, or a woman facing a hard close.",
-  "30_28": "Lily + Man: a mature, settled man, or peace within his family.",
-  "30_29": "Lily + Woman: a mature, settled woman, or peace within her family.",
-  "30_24": "Lily + Heart: a calm, long-standing love, settled rather than new.",
-  "31_28": "Sun + Man: success and vitality for a man.",
-  "31_29": "Sun + Woman: success and vitality for a woman.",
-  "31_34": "Sun + Fish: financial success — money flowing in easily.",
-  "32_28": "Moon + Man: recognition or reputation concerning a man.",
-  "32_29": "Moon + Woman: recognition or reputation concerning a woman.",
-  "32_16": "Moon + Stars: emotional clarity and honoured feeling.",
-  "33_4": "Key + House: a settled, certain outcome concerning the home.",
-  "33_28": "Key + Man: a definite, important answer concerning a man.",
-  "33_29": "Key + Woman: a definite, important answer concerning a woman.",
-  "33_34": "Key + Fish: a certain, unlocked financial gain.",
-  "34_28": "Fish + Man: money or business connected to a man.",
-  "34_29": "Fish + Woman: money or business connected to a woman.",
-  "34_35": "Fish + Anchor: steady, reliable income.",
-  "35_28": "Anchor + Man: long-term stability for a man, particularly at work.",
-  "35_29": "Anchor + Woman: long-term stability for a woman, particularly at work.",
-  "35_19": "Anchor + Tower: stable, secure employment within an institution.",
-  "36_28": "Cross + Man: a burden or hard test for a man to carry.",
-  "36_29": "Cross + Woman: a burden or hard test for a woman to carry.",
-  "36_4": "Cross + House: a difficulty weighing on the home.",
-  "36_5": "Cross + Tree: a heavy health matter to carry with patience."
+  "1_2": "Main Male + Main Female: a relationship between the two — read their other neighbours to see how it's going.",
+  "1_7": "Main Male + Letter: news concerning, or brought by, a man.",
+  "1_8": "Main Male + False Person: a man not being entirely straightforward, caution advised.",
+  "1_9": "Main Male + Change: a significant shift affecting a man.",
+  "1_14": "Main Male + Sad News: disappointing news concerning a man.",
+  "1_15": "Main Male + Lovers: romantic fulfilment for a man.",
+  "1_17": "Main Male + Gift: a gift or kindness from, or offered to, a man.",
+  "1_19": "Main Male + Fatality: an unavoidable turn of events for a man.",
+  "1_20": "Main Male + House: a man's home life, or a man at the centre of domestic matters.",
+  "1_24": "Main Male + Theft: loss or vulnerability affecting a man.",
+  "1_26": "Main Male + Great Fortune: real happiness and fulfilment for a man.",
+  "1_29": "Main Male + Prison: a man feeling trapped or restricted.",
+  "1_32": "Main Male + Sorrow and Unpleasantness: a difficult period for a man.",
+  "1_34": "Main Male + Work and Occupation: a man's job or working life.",
+  "1_35": "Main Male + Long Road: a lengthy process or path for a man.",
+  "1_36": "Main Male + Great Water/Hope: deep feeling or longing on a man's part.",
+  "2_7": "Main Female + Letter: news concerning, or brought by, a woman.",
+  "2_8": "Main Female + False Person: a woman not being entirely straightforward, caution advised.",
+  "2_9": "Main Female + Change: a significant shift affecting a woman.",
+  "2_14": "Main Female + Sad News: disappointing news concerning a woman.",
+  "2_15": "Main Female + Lovers: romantic fulfilment for a woman.",
+  "2_17": "Main Female + Gift: a gift or kindness from, or offered to, a woman.",
+  "2_19": "Main Female + Fatality: an unavoidable turn of events for a woman.",
+  "2_20": "Main Female + House: a woman's home life, or a woman at the centre of domestic matters.",
+  "2_24": "Main Female + Theft: loss or vulnerability affecting a woman.",
+  "2_26": "Main Female + Great Fortune: real happiness and fulfilment for a woman.",
+  "2_29": "Main Female + Prison: a woman feeling trapped or restricted.",
+  "2_32": "Main Female + Sorrow and Unpleasantness: a difficult period for a woman.",
+  "2_34": "Main Female + Work and Occupation: a woman's job or working life.",
+  "2_35": "Main Female + Long Road: a lengthy process or path for a woman.",
+  "2_36": "Main Female + Great Water/Hope: deep feeling or longing on a woman's part.",
+  "3_4": "Marriage + Meeting: a significant encounter leading toward commitment.",
+  "3_26": "Marriage + Great Fortune: a deeply happy, fulfilling partnership.",
+  "3_20": "Marriage + House: a marriage and a home coming together, or a domestic union.",
+  "3_36": "Marriage + Great Water/Hope: a partnership rooted in deep feeling, or a hoped-for union.",
+  "5_8": "Good Gentleman + False Person: a trusted older man with something to hide — caution advised.",
+  "5_17": "Good Gentleman + Gift: a meaningful gift from a significant older man.",
+  "6_8": "Good Lady + False Person: a trusted older woman with something to hide — caution advised.",
+  "6_17": "Good Lady + Gift: a meaningful gift from a significant older woman.",
+  "7_10": "Letter + Journey: news about travel, or a message arriving from a distance.",
+  "7_14": "Letter + Sad News: disappointing news arriving in writing.",
+  "7_20": "Letter + House: correspondence concerning the home.",
+  "9_20": "Change + House: a house move or domestic upheaval.",
+  "10_24": "Journey + Theft: risk of loss while travelling.",
+  "10_35": "Journey + Long Road: a lengthy journey or drawn-out process ahead.",
+  "11_34": "Sudden Wealth + Work and Occupation: financial gain through work or a career move.",
+  "11_27": "Sudden Wealth + Unhoped-for Money: a strong run of unexpected financial gain.",
+  "15_36": "Lovers + Great Water/Hope: a hoped-for romantic outcome coming to pass.",
+  "17_5": "Gift + Good Gentleman: a meaningful gift from someone significant.",
+  "17_6": "Gift + Good Lady: a meaningful gift from someone significant.",
+  "18_20": "Child + House: a new addition to the household, literal or otherwise.",
+  "18_31": "Short Illness + Child: a child's minor illness, or a vulnerable, delicate feeling.",
+  "20_29": "House + Prison: feeling trapped within the home or family situation.",
+  "23_24": "Court of Law + Theft: a legal matter involving loss or dispute.",
+  "23_30": "Court of Law + Court Official: a legal matter reaching a formal decision-maker.",
+  "24_30": "Court Official + Theft: a legal matter involving loss or dispute.",
+  "25_34": "High Honours + Work and Occupation: recognition or promotion at work.",
+  "26_3": "Great Fortune + Marriage: a deeply happy, fulfilling partnership.",
+  "27_34": "Unhoped-for Money + Work and Occupation: an unexpected financial turnaround through work.",
+  "29_34": "Prison + Work and Occupation: feeling trapped or stuck in a job.",
+  "31_18": "Short Illness + Child: a child's minor illness, or a vulnerable, delicate feeling.",
+  "32_34": "Sorrow and Unpleasantness + Work and Occupation: a genuinely difficult stretch at work.",
+  "33_36": "Gloomy Thoughts + Great Water/Hope: low mood sitting over deep emotional matters.",
+  "34_38": "Work and Occupation + Toil and Labour: a job that's demanding hard, grinding effort.",
+  "35_10": "Long Road + Journey: a lengthy journey or drawn-out process ahead.",
+  "36_15": "Great Water/Hope + Lovers: a hoped-for romantic outcome coming to pass.",
+  "37_34": "Poverty + Work and Occupation: financial hardship despite steady work.",
+  "37_29": "Poverty + Prison: hardship that feels inescapable.",
+  "39_20": "Community + House: family and wider support coming together around the home.",
+  "39_32": "Community + Sorrow and Unpleasantness: a difficult period made easier by shared support.",
+  "8_5": "False Person + Good Gentleman: a trusted older man with something to hide — caution advised.",
+  "8_6": "False Person + Good Lady: a trusted older woman with something to hide — caution advised.",
+  "14_7": "Sad News + Letter: disappointing news arriving in writing.",
+  "20_9": "House + Change: a house move or domestic upheaval.",
+  "24_10": "Theft + Journey: risk of loss while travelling.",
+  "26_39": "Great Fortune + Community: happiness found and shared with others."
 };

@@ -11,42 +11,45 @@
 // ---- simple SVG glyphs, one per card, drawn with basic shapes only ----
 
 const CARD_ICONS = {
-  1: '<path d="M20 78 L45 40 L55 55 L80 22" /><circle cx="80" cy="22" r="6" fill="currentColor" stroke="none"/>',
-  2: '<circle cx="38" cy="38" r="16"/><circle cx="62" cy="38" r="16"/><circle cx="50" cy="58" r="16"/><line x1="50" y1="70" x2="50" y2="90"/>',
-  3: '<path d="M15 62 L85 62 L72 82 L28 82 Z"/><line x1="50" y1="62" x2="50" y2="18"/><path d="M50 22 L78 40 L50 50 Z"/>',
-  4: '<path d="M18 55 L50 24 L82 55 L82 84 L18 84 Z"/><line x1="42" y1="84" x2="42" y2="60" /><line x1="58" y1="84" x2="58" y2="60"/>',
-  5: '<circle cx="50" cy="38" r="26"/><line x1="50" y1="60" x2="50" y2="88"/>',
-  6: '<ellipse cx="38" cy="48" rx="20" ry="14"/><ellipse cx="62" cy="48" rx="22" ry="16"/><ellipse cx="50" cy="60" rx="26" ry="14"/>',
-  7: '<path d="M18 30 C 40 30, 20 55, 42 55 C 64 55, 44 80, 82 78"/>',
-  8: '<path d="M38 15 L62 15 L78 45 L78 85 L22 85 L22 45 Z"/>',
-  9: '<circle cx="38" cy="32" r="12"/><circle cx="62" cy="32" r="12"/><circle cx="50" cy="46" r="12"/><line x1="50" y1="58" x2="50" y2="88"/>',
-  10: '<path d="M70 20 C 40 20, 20 45, 35 68 C 45 82, 65 75, 62 58"/><line x1="35" y1="68" x2="15" y2="90"/>',
-  11: '<path d="M22 20 L78 40 L30 55 L74 72 L26 88"/>',
-  12: '<path d="M15 55 L35 35 L45 50 L55 30 L65 50 L85 55"/>',
-  13: '<circle cx="50" cy="34" r="16"/><path d="M30 88 C 30 62, 70 62, 70 88"/>',
-  14: '<path d="M22 75 L35 32 L50 52 L65 32 L78 75 Z"/><circle cx="40" cy="60" r="4" fill="currentColor" stroke="none"/><circle cx="60" cy="60" r="4" fill="currentColor" stroke="none"/>',
-  15: '<circle cx="50" cy="55" r="28"/><circle cx="30" cy="28" r="9"/><circle cx="70" cy="28" r="9"/>',
-  16: '<path d="M50 15 L58 40 L84 40 L63 55 L71 80 L50 65 L29 80 L37 55 L16 40 L42 40 Z"/>',
-  17: '<line x1="50" y1="90" x2="50" y2="55"/><ellipse cx="50" cy="42" rx="16" ry="20"/><path d="M50 32 L70 22"/>',
-  18: '<circle cx="50" cy="50" r="14" fill="currentColor" stroke="none"/><circle cx="30" cy="34" r="7" fill="currentColor" stroke="none"/><circle cx="70" cy="34" r="7" fill="currentColor" stroke="none"/><circle cx="24" cy="60" r="7" fill="currentColor" stroke="none"/><circle cx="76" cy="60" r="7" fill="currentColor" stroke="none"/>',
-  19: '<path d="M25 88 L25 40 L32 40 L32 30 L42 30 L42 40 L58 40 L58 30 L68 30 L68 40 L75 40 L75 88 Z"/>',
-  20: '<circle cx="30" cy="45" r="14"/><line x1="30" y1="59" x2="30" y2="85"/><circle cx="68" cy="38" r="18"/><line x1="68" y1="56" x2="68" y2="85"/>',
-  21: '<path d="M10 82 L38 30 L52 52 L66 25 L92 82 Z"/><path d="M60 40 L66 25 L72 40"/>',
-  22: '<line x1="20" y1="20" x2="80" y2="80"/><line x1="80" y1="20" x2="20" y2="80"/>',
-  23: '<circle cx="45" cy="55" r="16"/><circle cx="65" cy="45" r="6"/><path d="M61 55 C 80 55, 85 70, 90 62"/><circle cx="38" cy="48" r="3" fill="currentColor" stroke="none"/>',
-  24: '<path d="M50 85 C 15 60, 20 25, 50 40 C 80 25, 85 60, 50 85 Z"/>',
-  25: '<circle cx="50" cy="50" r="26"/><circle cx="50" cy="50" r="13" fill="#1a1138"/>',
-  26: '<path d="M50 25 L18 32 L18 78 L50 71 L82 78 L82 32 Z"/><line x1="50" y1="25" x2="50" y2="71"/>',
-  27: '<rect x="16" y="28" width="68" height="46" rx="2"/><path d="M16 28 L50 58 L84 28"/>',
-  28: '<path d="M30 30 L70 30 L60 45 L40 45 Z"/><rect x="44" y="45" width="12" height="10"/><circle cx="50" cy="20" r="4" fill="currentColor" stroke="none"/>',
-  29: '<circle cx="50" cy="30" r="13"/><path d="M32 88 L40 45 L60 45 L68 88 Z"/>',
-  30: '<line x1="50" y1="50" x2="50" y2="90"/><path d="M50 50 C 30 50, 22 30, 38 18 C 44 30, 44 44, 50 50 Z"/><path d="M50 50 C 70 50, 78 30, 62 18 C 56 30, 56 44, 50 50 Z"/>',
-  31: '<circle cx="50" cy="50" r="18"/><line x1="50" y1="10" x2="50" y2="22"/><line x1="50" y1="78" x2="50" y2="90"/><line x1="10" y1="50" x2="22" y2="50"/><line x1="78" y1="50" x2="90" y2="50"/><line x1="22" y1="22" x2="30" y2="30"/><line x1="70" y1="70" x2="78" y2="78"/><line x1="78" y1="22" x2="70" y2="30"/><line x1="30" y1="70" x2="22" y2="78"/>',
-  32: '<defs><mask id="moon-crescent-mask"><rect width="100" height="100" fill="white"/><circle cx="58" cy="40" r="22" fill="black"/></mask></defs><circle cx="44" cy="50" r="28" fill="currentColor" stroke="none" mask="url(#moon-crescent-mask)"/>',
-  33: '<circle cx="30" cy="50" r="14"/><circle cx="30" cy="50" r="5" fill="#1a1138"/><line x1="42" y1="50" x2="85" y2="50"/><line x1="70" y1="50" x2="70" y2="62"/><line x1="80" y1="50" x2="80" y2="60"/>',
-  34: '<path d="M15 50 C 35 25, 70 25, 88 50 C 70 75, 35 75, 15 50 Z"/><path d="M15 50 L2 38 M15 50 L2 62"/><circle cx="65" cy="45" r="3" fill="currentColor" stroke="none"/>',
-  35: '<circle cx="50" cy="22" r="8"/><line x1="50" y1="30" x2="50" y2="85"/><line x1="30" y1="45" x2="70" y2="45"/><path d="M20 55 C 20 78, 38 88, 50 88 C 62 88, 80 78, 80 55"/>',
-  36: '<line x1="50" y1="15" x2="50" y2="88"/><line x1="24" y1="38" x2="76" y2="38"/>'
+  1: '<path d="M30 30 L70 30 L60 45 L40 45 Z"/><rect x="44" y="45" width="12" height="10"/><circle cx="50" cy="20" r="4" fill="currentColor" stroke="none"/>',
+  2: '<circle cx="50" cy="30" r="13"/><path d="M32 88 L40 45 L60 45 L68 88 Z"/>',
+  3: '<circle cx="50" cy="50" r="26"/><circle cx="50" cy="50" r="13" fill="#1a1138"/>',
+  4: '<circle cx="40" cy="50" r="22"/><circle cx="60" cy="50" r="22"/>',
+  5: '<circle cx="50" cy="30" r="14"/><path d="M32 88 L38 45 L62 45 L68 88 Z"/><line x1="72" y1="55" x2="72" y2="90"/>',
+  6: '<circle cx="50" cy="28" r="13"/><path d="M26 90 C 26 55, 74 55, 74 90 Z"/>',
+  7: '<rect x="16" y="28" width="68" height="46" rx="2"/><path d="M16 28 L50 58 L84 28"/>',
+  8: '<path d="M18 30 C 40 30, 20 55, 42 55 C 64 55, 44 80, 82 78"/>',
+  9: '<line x1="50" y1="90" x2="50" y2="55"/><ellipse cx="50" cy="42" rx="16" ry="20"/><path d="M50 32 L70 22"/>',
+  10: '<path d="M15 62 L85 62 L72 82 L28 82 Z"/><line x1="50" y1="62" x2="50" y2="18"/><path d="M50 22 L78 40 L50 50 Z"/>',
+  11: '<circle cx="50" cy="50" r="20"/><line x1="50" y1="15" x2="50" y2="25"/><line x1="50" y1="75" x2="50" y2="85"/><line x1="15" y1="50" x2="25" y2="50"/><line x1="75" y1="50" x2="85" y2="50"/>',
+  12: '<circle cx="50" cy="26" r="11"/><path d="M36 88 L42 42 L58 42 L64 88 Z"/><line x1="50" y1="15" x2="50" y2="8"/>',
+  13: '<circle cx="50" cy="26" r="11"/><path d="M36 88 L42 42 L58 42 L64 88 Z"/><path d="M46 12 L50 4 L54 12 Z"/>',
+  14: '<path d="M50 20 L50 55"/><path d="M35 45 L50 65 L65 45"/><ellipse cx="50" cy="82" rx="22" ry="7"/>',
+  15: '<path d="M50 85 C 15 60, 20 25, 50 40 C 80 25, 85 60, 50 85 Z"/>',
+  16: '<circle cx="55" cy="42" r="24"/><circle cx="30" cy="75" r="8"/><circle cx="18" cy="88" r="4"/>',
+  17: '<rect x="25" y="45" width="50" height="40"/><line x1="50" y1="45" x2="50" y2="85"/><line x1="25" y1="60" x2="75" y2="60"/><path d="M35 45 C 35 30, 65 30, 65 45"/>',
+  18: '<circle cx="50" cy="34" r="16"/><path d="M30 88 C 30 62, 70 62, 70 88"/>',
+  19: '<line x1="50" y1="15" x2="50" y2="88"/><line x1="24" y1="38" x2="76" y2="38"/>',
+  20: '<path d="M18 55 L50 24 L82 55 L82 84 L18 84 Z"/><line x1="42" y1="84" x2="42" y2="60" /><line x1="58" y1="84" x2="58" y2="60"/>',
+  21: '<path d="M22 58 L50 30 L78 58 L78 84 L22 84 Z"/><circle cx="50" cy="66" r="10"/>',
+  22: '<path d="M25 88 L25 40 L32 40 L32 30 L42 30 L42 40 L58 40 L58 30 L68 30 L68 40 L75 40 L75 88 Z"/>',
+  23: '<line x1="50" y1="15" x2="50" y2="80"/><line x1="20" y1="35" x2="80" y2="35"/><circle cx="20" cy="55" r="12"/><circle cx="80" cy="55" r="12"/><line x1="30" y1="85" x2="70" y2="85"/>',
+  24: '<circle cx="45" cy="55" r="16"/><circle cx="65" cy="45" r="6"/><path d="M61 55 C 80 55, 85 70, 90 62"/><circle cx="38" cy="48" r="3" fill="currentColor" stroke="none"/>',
+  25: '<path d="M50 90 C 20 80, 15 40, 35 15" /><path d="M50 90 C 80 80, 85 40, 65 15"/>',
+  26: '<circle cx="50" cy="50" r="18"/><line x1="50" y1="10" x2="50" y2="22"/><line x1="50" y1="78" x2="50" y2="90"/><line x1="10" y1="50" x2="22" y2="50"/><line x1="78" y1="50" x2="90" y2="50"/><line x1="22" y1="22" x2="30" y2="30"/><line x1="70" y1="70" x2="78" y2="78"/><line x1="78" y1="22" x2="70" y2="30"/><line x1="30" y1="70" x2="22" y2="78"/>',
+  27: '<path d="M15 50 C 35 25, 70 25, 88 50 C 70 75, 35 75, 15 50 Z"/><path d="M15 50 L2 38 M15 50 L2 62"/><circle cx="65" cy="45" r="3" fill="currentColor" stroke="none"/>',
+  28: '<path d="M50 15 L58 40 L84 40 L63 55 L71 80 L50 65 L29 80 L37 55 L16 40 L42 40 Z"/>',
+  29: '<rect x="20" y="20" width="60" height="60"/><line x1="35" y1="20" x2="35" y2="80"/><line x1="50" y1="20" x2="50" y2="80"/><line x1="65" y1="20" x2="65" y2="80"/>',
+  30: '<circle cx="50" cy="26" r="12"/><path d="M30 85 L38 45 L62 45 L70 85 Z"/><rect x="20" y="85" width="60" height="6"/>',
+  31: '<circle cx="50" cy="50" r="30"/><line x1="50" y1="32" x2="50" y2="68"/><line x1="32" y1="50" x2="68" y2="50"/>',
+  32: '<path d="M50 15 C 65 40, 75 55, 75 68 C 75 82, 62 90, 50 90 C 38 90, 25 82, 25 68 C 25 55, 35 40, 50 15 Z"/>',
+  33: '<ellipse cx="38" cy="48" rx="20" ry="14"/><ellipse cx="62" cy="48" rx="22" ry="16"/><ellipse cx="50" cy="60" rx="26" ry="14"/>',
+  34: '<rect x="20" y="40" width="60" height="40" rx="4"/><path d="M40 40 L40 28 L60 28 L60 40"/>',
+  35: '<line x1="20" y1="90" x2="45" y2="20"/><line x1="80" y1="90" x2="55" y2="20"/><line x1="50" y1="55" x2="50" y2="75"/>',
+  36: '<path d="M15 40 C 30 25, 40 55, 55 40 C 70 25, 80 55, 90 40" /><path d="M15 65 C 30 50, 40 80, 55 65 C 70 50, 80 80, 90 65"/>',
+  37: '<circle cx="50" cy="50" r="26"/><line x1="35" y1="35" x2="65" y2="65"/>',
+  38: '<line x1="20" y1="80" x2="70" y2="20"/><line x1="30" y1="20" x2="80" y2="80"/>',
+  39: '<circle cx="30" cy="45" r="14"/><line x1="30" y1="59" x2="30" y2="85"/><circle cx="68" cy="38" r="18"/><line x1="68" y1="56" x2="68" y2="85"/>'
 };
 
 function cardIconSVG(id) {
@@ -123,9 +126,9 @@ function renderHome(root) {
   const choices = [
     { href: "#/daily", title: "Daily card", desc: "One card for today, drawn the same way all day." },
     { href: "#/three-card", title: "Situation · Action · Outcome", desc: "A simple three-card read for a specific question." },
-    { href: "#/significator", title: "Significator spread", desc: "Pick yourself as Gentleman or Lady, draw four cards around you." },
+    { href: "#/significator", title: "Significator spread", desc: "Pick yourself as Main Male or Main Female, draw four cards around you." },
     { href: "#/tableau", title: "Grand Tableau", desc: "The full 36-card layout, read by house, corner and nearness to you." },
-    { href: "#/deck", title: "Browse the deck", desc: "All 36 cards with their meanings, short and long." }
+    { href: "#/deck", title: "Browse the deck", desc: "All 39 cards with their meanings, short and long." }
   ];
 
   choices.forEach((choice) => {
@@ -234,12 +237,12 @@ function renderSignificator(root) {
       </div>
     </div>
     <div class="significator-picker">
-      <button class="plain-button" type="button" data-sig="28" aria-pressed="true">Gentleman (Man)</button>
-      <button class="plain-button" type="button" data-sig="29" aria-pressed="false">Lady (Woman)</button>
+      <button class="plain-button" type="button" data-sig="1" aria-pressed="true">Main Male</button>
+      <button class="plain-button" type="button" data-sig="2" aria-pressed="false">Main Female</button>
     </div>
     <button class="primary-button" type="button">Draw around me</button>
   `;
-  let significatorId = 28;
+  let significatorId = 1;
   const sigButtons = Array.from(panel.querySelectorAll("[data-sig]"));
   sigButtons.forEach((button) => {
     button.addEventListener("click", () => {
@@ -298,12 +301,12 @@ function renderTableau(root) {
       </div>
     </div>
     <div class="tableau-controls">
-      <button class="plain-button" type="button" data-sig="28" aria-pressed="true">Gentleman (Man)</button>
-      <button class="plain-button" type="button" data-sig="29" aria-pressed="false">Lady (Woman)</button>
+      <button class="plain-button" type="button" data-sig="1" aria-pressed="true">Main Male</button>
+      <button class="plain-button" type="button" data-sig="2" aria-pressed="false">Main Female</button>
       <button class="primary-button" type="button">Lay the tableau</button>
     </div>
   `;
-  let significatorId = 28;
+  let significatorId = 1;
   const sigButtons = Array.from(panel.querySelectorAll("[data-sig]"));
   sigButtons.forEach((button) => {
     button.addEventListener("click", () => {
@@ -371,7 +374,7 @@ function renderDeck(root) {
       <span class="diamond" aria-hidden="true"></span>
       <div>
         <h2>The deck</h2>
-        <p>All 36 Kipper cards. Kipper is read upright only — there are no reversed meanings.</p>
+        <p>All 39 Kipper cards. Kipper is read upright only — there are no reversed meanings.</p>
       </div>
     </div>
   `;

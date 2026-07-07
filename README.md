@@ -1,10 +1,10 @@
 # Kipper Cards
 
-A 36-card Kipper oracle reading app. Vanilla HTML/CSS/JS, no build step, installable as a PWA, works fully offline once loaded.
+A 39-card Kipper oracle reading app (Fin de Siècle deck numbering). Vanilla HTML/CSS/JS, no build step, installable as a PWA, works fully offline once loaded.
 
 ## Files
 
-- `data.js` — deck data only (all 36 cards + neighbour combination rules). Edit meanings here.
+- `data.js` — deck data only (all 39 cards + neighbour combination rules). Edit meanings here. Grand Tableau uses only ids 1-36 (see `reading.js`).
 - `reading.js` — reading logic only (seeded shuffle, spreads, Grand Tableau interpretation). No DOM.
 - `app.js` — UI rendering and routing. Calls into `reading.js`, never duplicates its logic.
 - `index.html` / `about.html` — pages.
