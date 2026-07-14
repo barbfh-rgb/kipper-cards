@@ -1,4 +1,4 @@
-const CACHE_NAME = "kipper-cards-v7";
+const CACHE_NAME = "kipper-cards-v8";
 
 const APP_SHELL = [
   "/",
